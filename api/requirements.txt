@@ -1,0 +1,7 @@
+google-generativeai
+python-dotenv
+youtube-search-python
+
+
+# pip install PyPDF2 python-docx pdfplumber spacy regex
+# python -m spacy download en_core_web_sm
