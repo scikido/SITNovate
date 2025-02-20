@@ -128,11 +128,7 @@ async def generate_questions(request: InterviewRequest):
     return {"questions": questions}
 
 
-# from fastapi import FastAPI, HTTPException
-# from pydantic import BaseModel
-# import google.generativeai as genai
 
-# Configure Gemini model
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,

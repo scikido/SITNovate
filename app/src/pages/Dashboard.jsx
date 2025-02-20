@@ -72,7 +72,7 @@ export function Dashboard() {
           >
             <div className="p-4">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-xl font-bold text-gray-800">CareerAI</h2>
+                <h2 className="text-xl font-bold text-gray-800">Thrvye</h2>
                 <button
                   onClick={() => setIsSidebarOpen(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
