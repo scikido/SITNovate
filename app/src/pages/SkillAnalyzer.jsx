@@ -11,7 +11,7 @@ export default function SkillAnalyzer() {
   const [others, setOthers] = useState('');
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('skills');
+  const [activeTab, setActiveTab] = useState('projects');
   const [parsedData, setParsedData] = useState(null);
 
   const handleAnalyze = async () => {
@@ -182,12 +182,7 @@ export default function SkillAnalyzer() {
         <div className="mt-8 w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Analysis Results</h2>
           <div className="flex flex-wrap gap-4 mb-4">
-            <button 
-              onClick={() => setActiveTab('skills')}
-              className={`px-4 py-2 rounded-full shadow-md transition ${activeTab === 'skills' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-            >
-              Skills
-            </button>
+          
             <button 
               onClick={() => setActiveTab('experience')}
               className={`px-4 py-2 rounded-full shadow-md transition ${activeTab === 'experience' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
@@ -199,6 +194,12 @@ export default function SkillAnalyzer() {
               className={`px-4 py-2 rounded-full shadow-md transition ${activeTab === 'projects' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
             >
               Projects
+            </button>
+            <button 
+              onClick={() => setActiveTab('skills')}
+              className={`px-4 py-2 rounded-full shadow-md transition ${activeTab === 'skills' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+            >
+              Skills
             </button>
             <button 
               onClick={() => setActiveTab('others')}

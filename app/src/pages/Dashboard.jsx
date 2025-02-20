@@ -31,12 +31,14 @@ const mockData = [
 const features = [
   { icon: Brain, title: 'Learning Path', description: 'AI-customized learning journey', link: '/learning' },
   { icon: Target, title: 'Resume Scanner', description: 'Gap assessment & recommendations', link: '/skill' },
+  { icon: Map, title: 'Career Map', description: 'Future path visualization', link: '/career' },
   { icon: FileSearch, title: 'ATS Scanner', description: 'Job market fit analysis', link: '/jobs' },
-  { icon: FileEdit, title: 'Resume Builder', description: 'AI-powered optimization', link: '/resume' },
+  
   { icon: MessageSquare, title: 'AI Mentor', description: 'Personal career guidance', link: '/mentor' },
   { icon: Briefcase, title: 'Projects', description: 'Real-world experience', link: '/projects' },
-  { icon: Map, title: 'Career Map', description: 'Future path visualization', link: '/career' },
+ 
   { icon: User, title: 'Personal Growth', description: 'AI personality coach', link: '/growth' },
+  { icon: FileEdit, title: 'Resume Builder', description: 'AI-powered optimization', link: '/resume' },
 ];
 
 const sidebarLinks = [
