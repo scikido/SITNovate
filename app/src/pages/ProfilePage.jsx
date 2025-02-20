@@ -114,12 +114,18 @@ const ProfilePage = () => {
           />
         )}
 
-        {/* Logout Button */}
+    
         <button
           className="mt-6 w-full bg-red-500 hover:bg-red-600 p-2 rounded-md"
           onClick={() => auth.signOut().then(() => navigate("/auth"))}
         >
           Logout
+        </button>
+        <button
+          className="mt-6 w-full bg-red-500 hover:bg-red-600 p-2 rounded-md"
+          onClick={() => navigate("/dashboard")}
+        >
+         Dashboard
         </button>
       </div>
     </div>

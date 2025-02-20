@@ -3,13 +3,12 @@ import { FaSearch } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ReactFlow, { MiniMap, Controls } from "reactflow";
-
-import Modal from "./Modal";
 import { generateContent } from "../feature_functions/LearningPath";
 import React from "react";
 import "reactflow/dist/style.css";
 import { motion } from 'framer-motion';
 import { BookOpen, CheckCircle, Clock } from 'lucide-react';
+import Modal from "./Modal";
 
 const courses = [
   {
@@ -32,9 +31,7 @@ const courses = [
   },
 ];
 
-
-
-export default function Quiz() {
+export default function Learn() {
   const [topic, setTopic] = useState("");
   const [courseData, setCourseData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -53,7 +50,7 @@ export default function Quiz() {
         id: `${index + 1}`,
         data: {
           label: item.topic,
-          links: item.link,
+          links: item.links,
         },
         position: { x: (index % 4) * 200, y: Math.floor(index / 4) * 120 },
       }));
@@ -88,80 +85,79 @@ export default function Quiz() {
 
   return (
     <>
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <header>
-          <h1 className="text-3xl font-bold text-gray-800">Your Learning Path</h1>
-          <p className="text-gray-600 mt-2">Personalized curriculum based on your career goals</p>
-         
-        </header>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-6"
+        >
+          <header>
+            <h1 className="text-3xl font-bold text-gray-800">Your Learning Path</h1>
+            <p className="text-gray-600 mt-2">Personalized curriculum based on your career goals</p>
+          </header>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <div className="space-y-6">
-            {courses.map((course, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="border-b last:border-b-0 pb-6 last:pb-0"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <BookOpen className="w-6 h-6 text-blue-600" />
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="space-y-6">
+              {courses.map((course, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="border-b last:border-b-0 pb-6 last:pb-0"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-2 bg-blue-50 rounded-lg">
+                        <BookOpen className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800">{course.title}</h3>
+                        <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+                          <span className="flex items-center">
+                            <Clock className="w-4 h-4 mr-1" />
+                            {course.duration}
+                          </span>
+                          <span className="flex items-center">
+                            <CheckCircle className="w-4 h-4 mr-1" />
+                            {course.status}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-800">{course.title}</h3>
-                      <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
-                        <span className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {course.duration}
-                        </span>
-                        <span className="flex items-center">
-                          <CheckCircle className="w-4 h-4 mr-1" />
-                          {course.status}
-                        </span>
+                    <div className="w-24 text-right">
+                      <div className="text-sm font-medium text-gray-900">{course.progress}%</div>
+                      <div className="mt-1 w-full bg-gray-200 rounded-full h-2">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${course.progress}%` }}
+                          transition={{ duration: 1, delay: index * 0.2 }}
+                          className="bg-blue-600 h-2 rounded-full"
+                        />
                       </div>
                     </div>
                   </div>
-                  <div className="w-24 text-right">
-                    <div className="text-sm font-medium text-gray-900">{course.progress}%</div>
-                    <div className="mt-1 w-full bg-gray-200 rounded-full h-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${course.progress}%` }}
-                        transition={{ duration: 1, delay: index * 0.2 }}
-                        className="bg-blue-600 h-2 rounded-full"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </motion.div>
-    </div>
-      <div className="px-12">
-        <div className="flex justify-center items-center gap-2">
+        </motion.div>
+
+        <form onSubmit={getCourseContent} className="flex justify-center items-center gap-2 mt-8">
           <input
             className="bg-gray-100 w-[500px] px-2 py-2 rounded-full focus:outline-none placeholder:pl-4"
             type="text"
             placeholder="What do you want to learn today?"
+            value={topic}
             onChange={(e) => setTopic(e.target.value)}
           />
           <button
             className="bg-[#333333] px-6 py-1 text-white rounded-md flex items-center gap-1"
-            onClick={getCourseContent}
+            type="submit"
           >
             Learn <FaSearch size={16} />
           </button>
-        </div>
+        </form>
 
         {loading ? (
           <div className="mt-24">
@@ -176,21 +172,8 @@ export default function Quiz() {
           </div>
         )}
 
-        {modalContent && modalContent.links && modalContent.links.length > 0 && (
-          <div
-            className="fixed inset-0 flex justify-end items-center bg-black bg-opacity-50 cursor-pointer z-50"
-            onClick={closeModal}
-          >
-            <div
-              className="bg-black w-3/4 h-full p-4 overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h2 className="text-white text-lg font-semibold mb-4">
-                {modalContent.label}
-              </h2>
-              <Modal modalContent={modalContent} closeModal={closeModal} />
-            </div>
-          </div>
+        {modalContent && (
+          <Modal modalContent={modalContent} closeModal={closeModal} />
         )}
       </div>
     </>

@@ -16,26 +16,27 @@ import {
   Settings,
   Bell
 } from 'lucide-react';
+import { Link, useNavigate } from "react-router-dom";
 
 
 const mockData = [
   { name: 'Week 1', progress: 20 },
-  { name: 'Week 2', progress: 35 },
+  { name: 'Week 2', progress: 45 },
   { name: 'Week 3', progress: 45 },
-  { name: 'Week 4', progress: 60 },
+  { name: 'Week 4', progress: 30 },
   { name: 'Week 5', progress: 75 },
   { name: 'Week 6', progress: 85 },
 ];
 
 const features = [
-  { icon: Brain, title: 'Learning Path', description: 'AI-customized learning journey' },
-  { icon: Target, title: 'Skill Analysis', description: 'Gap assessment & recommendations' },
-  { icon: FileSearch, title: 'ATS Scanner', description: 'Job market fit analysis' },
-  { icon: FileEdit, title: 'Resume Builder', description: 'AI-powered optimization' },
-  { icon: MessageSquare, title: 'AI Mentor', description: 'Personal career guidance' },
-  { icon: Briefcase, title: 'Projects', description: 'Real-world experience' },
-  { icon: Map, title: 'Career Map', description: 'Future path visualization' },
-  { icon: User, title: 'Personal Growth', description: 'AI personality coach' },
+  { icon: Brain, title: 'Learning Path', description: 'AI-customized learning journey', link: '/learning' },
+  { icon: Target, title: 'Resume Scanner', description: 'Gap assessment & recommendations', link: '/skill' },
+  { icon: FileSearch, title: 'ATS Scanner', description: 'Job market fit analysis', link: '/jobs' },
+  { icon: FileEdit, title: 'Resume Builder', description: 'AI-powered optimization', link: '/resume' },
+  { icon: MessageSquare, title: 'AI Mentor', description: 'Personal career guidance', link: '/mentor' },
+  { icon: Briefcase, title: 'Projects', description: 'Real-world experience', link: '/projects' },
+  { icon: Map, title: 'Career Map', description: 'Future path visualization', link: '/career' },
+  { icon: User, title: 'Personal Growth', description: 'AI personality coach', link: '/growth' },
 ];
 
 const sidebarLinks = [
@@ -50,11 +51,10 @@ export function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('dashboard');
   const [notifications, setNotifications] = useState(3);
+  const navigate = useNavigate();
 
-
-
-  const handleFeatureClick = (title) => {
-    setActiveSection(title.toLowerCase().replace(/\s+/g, '-'));
+  const handleFeatureClick = (link) => {
+    navigate(link);
   };
 
   return (
@@ -80,17 +80,18 @@ export function Dashboard() {
               </div>
               <nav className="space-y-2">
                 {sidebarLinks.map((link) => (
-                  <motion.button
-                    key={link.id}
-                    whileHover={{ x: 5 }}
-                    onClick={() => setActiveSection(link.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
-                      activeSection === link.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    <link.icon size={20} />
-                    <span>{link.label}</span>
-                  </motion.button>
+                  <Link to={`/${link.id}`} key={link.id}>
+                    <motion.button
+                      whileHover={{ x: 5 }}
+                      onClick={() => setActiveSection(link.id)}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                        activeSection === link.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100'
+                      }`}
+                    >
+                      <link.icon size={20} />
+                      <span>{link.label}</span>
+                    </motion.button>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -149,7 +150,7 @@ export function Dashboard() {
               <motion.button
                 key={index}
                 whileHover={{ y: -5, scale: 1.02 }}
-                onClick={() => handleFeatureClick(feature.title)}
+                onClick={() => handleFeatureClick(feature.link)}
                 className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all text-left w-full"
               >
                 <feature.icon className="w-8 h-8 text-blue-600 mb-3" />

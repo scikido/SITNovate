@@ -146,6 +146,6 @@ export async function generateContent(topic) {
 }
 
 // Update the invocation of the new function
-(async() => {
-    await generateContent("JavaScript");
-})();
+// (async() => {
+//     await generateContent("JavaScript");
+// })();

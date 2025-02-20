@@ -6,7 +6,12 @@ const AuthPage = () => {
 
   const handleLogin = async () => {
     const user = await signInWithGoogle();
-    if (user) navigate("/profile");
+    if (user) {
+      console.log("User signed in:", user);
+      navigate("/profile");
+    } else {
+      console.error("User sign-in failed");
+    }
   };
 
   return (

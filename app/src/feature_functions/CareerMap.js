@@ -1,14 +1,13 @@
-import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-dotenv.config();
+// dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI("AIzaSyCDz4gjhidaJvdzPjYHxdo1o0CAqiqll9k");
 
-async function getRoadmap(role) {
+export async function getRoadmap(role) {
     const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
-        systemInstruction: "I will give you my dream Job Role and you must create a proper roadmap that i must follow to achieve it.",
+        systemInstruction: "I will give you my dream Job Role and you must create a proper roadmap that i must follow to achieve it. the output should be in HTML format",
     });
 
     const generationConfig = {
@@ -18,7 +17,6 @@ async function getRoadmap(role) {
         maxOutputTokens: 8192,
     };
 
-
     try {
         const chatSession = model.startChat({
             history: [],
@@ -27,8 +25,10 @@ async function getRoadmap(role) {
 
         const result = await chatSession.sendMessage(role);
         console.log(result.response.text());
+        return result.response.text();
     } catch (error) {
         console.error("Error:", error);
+        return "An error occurred while generating the roadmap.";
     }
 }
 
