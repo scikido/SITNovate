@@ -1,20 +1,20 @@
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
 import YouTubeSearch from "youtube-search-api";
 // const youtubesearchapi = require("youtube-search-api");
 // const { VideosSearch } = pkg;
 
-dotenv.config();
+// dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 // const {
 //     GoogleGenerativeAI,
 //     HarmCategory,
 //     HarmBlockThreshold,
 // } = require("@google/generative-ai");
 
-const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 // const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
