@@ -117,6 +117,7 @@ Bachelor’s or master’s degree in computer science, Engineering, or a related
 
 """
 
+
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 def analyse_skills(jd, skills):
     # Create the model

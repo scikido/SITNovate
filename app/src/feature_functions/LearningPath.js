@@ -48,7 +48,7 @@ async function getContent(role) {
         ],
     });
 
-    const result = await chatSession.sendMessage("Theory of computation");
+    const result = await chatSession.sendMessage(role);
     // const textContent = result.data.candidates[0].content.parts[0].text;
     const textContent = result.response.text();
     const start = textContent.indexOf("[");
@@ -140,11 +140,12 @@ export async function generateContent(topic) {
             links: links // Store the array of links for each topic
         };
     }));
+    console.log(content);
     return content;
-    // console.log(content);
+
 }
 
 // Update the invocation of the new function
-// (async() => {
-//     await generateContent("Theory of Computation");
-// })();
+(async() => {
+    await generateContent("JavaScript");
+})();

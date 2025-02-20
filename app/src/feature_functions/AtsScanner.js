@@ -50,11 +50,22 @@ async function extractSections(text) {
 
 async function parseResume(filePath) {
     const text = await extractTextFromPDF(filePath);
-    const extractedData = {
-        extracted_sections: await extractSections(text)
-    };
-    return extractedData;
+    let extractedSectionsString = await extractSections(text);
+
+    // Clean up the JSON string by removing Markdown-style code block markers
+    extractedSectionsString = extractedSectionsString.replace(/```json\n|\n```/g, '');
+
+    let extractedSections;
+    try {
+        extractedSections = JSON.parse(extractedSectionsString);
+    } catch (error) {
+        console.error("Error parsing extracted sections to JSON:", error);
+        extractedSections = {};
+    }
+
+    return { extracted_sections: extractedSections };
 }
+
 
 (async() => {
     const filePath = "/Users/devyanichavan/Documents/Projects/SITNovate/app/Devyani Resume.pdf";
